@@ -8,11 +8,10 @@ ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:'
 ActiveRecord::Schema.define do
   self.verbose = false
 
-  create_table :tag_bearer_tags, :force => true do |t|
+  create_table(:tags) do |t|
     t.string :key
     t.string :value
-    t.integer :owner_id
-    t.string :owner_class
+    t.references :taggable, polymorphic: true, index: true
     t.timestamps null: false
   end
 

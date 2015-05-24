@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = TagBearer::VERSION
   s.authors     = ['David Jellesma', 'Dan Jellesma']
   s.email       = ['davidjellesmas@gmail.com']
-  s.homepage    = 'https://github.com/dsjellz/acts_as_tag_bearer'
+  s.homepage    = 'https://github.com/dsjellz/tag_bearer'
   s.summary     = 'Key value tagging gem for ActiveRecord models'
   s.description = 'Key value tagging gem for ActiveRecord models'
   s.license     = 'MIT'
@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  # s.add_dependency 'rails', '~> 4.2.1'
   s.add_dependency 'rake'
   s.add_dependency 'rails'
   s.add_development_dependency 'sqlite3'
