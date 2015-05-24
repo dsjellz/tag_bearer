@@ -9,4 +9,4 @@ Setup is simple
 gem install tag_bearer
 ```
 
-This will create a migration for you to setup the 
+This will create a migration for you to create the database table needed to house the tags.
