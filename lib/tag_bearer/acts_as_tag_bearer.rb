@@ -24,32 +24,20 @@ module TagBearer
       # params = [{key: 'Owner', value: 'someone'}]
       def full_sync!(params)
         params.each{ |t| tag(t) }
-        remove_derelict_tags(params)
+        tags.where.not(key: params.map{|t| t[:key]}).destroy_all
       end
 
-      # 'Owner'
       def get_tag(tag)
         tags.find_by(key: tag).try :value
       end
 
-      # keys = %w(Owner Environment)
-      def get_tags(keys = [])
-        tags
-      end
-
-      def owned_tags
+      def tag_list
         tags.pluck(:key)
       end
 
       # params = {key: 'Owner', value: 'someone'}
       def tag(params)
         tags.where(key: params[:key]).first_or_create.update(value: params[:value])
-      end
-
-      private
-
-      def remove_derelict_tags(params)
-        tags.where.not(key: params.map{|t| t[:key]}).destroy_all
       end
 
     end

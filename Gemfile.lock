@@ -131,7 +131,6 @@ PLATFORMS
 
 DEPENDENCIES
   database_cleaner
-  rails
   rspec
   rspec-its
   rspec-rails
