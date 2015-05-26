@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'tag_bearer'
   s.version     = TagBearer::VERSION
   s.authors     = ['David Jellesma', 'Dan Jellesma']
-  s.email       = ['davidjellesmas@gmail.com']
+  s.email       = ['davidjellesma@gmail.com']
   s.homepage    = 'https://github.com/dsjellz/tag_bearer'
   s.summary     = 'Key value tagging gem for ActiveRecord models'
   s.description = 'Key value tagging gem for ActiveRecord models'

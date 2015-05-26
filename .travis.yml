@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.2.1
+addons:
+  code_climate:
+    repo_token: 7fc086fa5ddb82f01b388a7d2ed363b9a5f3d9d09fc0e14cb2b37724a7826646
+notifications:
+  email:
+    recipients:
+      - dan.jellesma@gmail.com
+    on_failure: change
+    on_success: never
