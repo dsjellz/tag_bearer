@@ -17,6 +17,10 @@ end
 import './lib/tasks/tag_bearer_tasks.rake'
 
 Bundler::GemHelper.install_tasks
+require 'rspec/core/rake_task'
+task :default => :spec
+RSpec::Core::RakeTask.new
+
 #
 # require 'rake/testtask'
 #
