@@ -3,7 +3,7 @@ require 'spec_helper'
 describe TagBearer::ActsAsTagBearer do
 
   describe '#add_tag' do
-    let(:model) { TaggableModel.new }
+    let(:model) { TaggableModel.create }
 
     it 'creates a single tag' do
       model.tag key: 'Owner', value: 'someone'
@@ -32,7 +32,7 @@ describe TagBearer::ActsAsTagBearer do
   end
 
   describe '#get_tag' do
-    let(:model) { TaggableModel.new }
+    let(:model) { TaggableModel.create }
 
     before(:each) do
       model.tag key: 'env', value: 'test'
