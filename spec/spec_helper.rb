@@ -1,3 +1,5 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
 $LOAD_PATH << '.' unless $LOAD_PATH.include?('.')
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require File.expand_path('../../lib/tag_bearer', __FILE__)
