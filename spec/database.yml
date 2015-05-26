@@ -1,7 +1,4 @@
-development:
-  adapter: postgresql
-  encoding: utf8
-  database: tag_bearer
-  username: tag_bearer
-  password: sample_pw
-  template: template0 # Required for UTF8 encoding
+test:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
