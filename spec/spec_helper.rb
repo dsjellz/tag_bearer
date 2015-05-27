@@ -1,10 +1,11 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 $LOAD_PATH << '.' unless $LOAD_PATH.include?('.')
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require File.expand_path('../../lib/tag_bearer', __FILE__)
 
 require 'database_cleaner'
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 ActiveRecord::Schema.define do
