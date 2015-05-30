@@ -12,6 +12,16 @@ module TagBearer
         has_many :tags, as: :taggable, class_name: Tag
         include TagBearer::ActsAsTagBearer::LocalInstanceMethods
       end
+
+      def with_tags(params)
+        tag_conditions = params.map{ |condition| "('#{condition[0].to_s}', '#{condition[1].to_s}')" }
+
+        TagBearer::Tag.select(:taggable_id)
+          .where(taggable_type: name)
+          .where("(tags.key, tags.value) IN (#{tag_conditions.join(',')})")
+          .group(:taggable_id, :taggable_type)
+          .having("COUNT(distinct tags.key)=#{params.size}").pluck(:taggable_id)
+      end
     end
 
     module LocalInstanceMethods
