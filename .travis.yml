@@ -4,6 +4,7 @@ rvm:
 addons:
   code_climate:
     repo_token: 49e3b5aad6e24d634e04982ce02ee84ae04e869eed9ae1d4f3577debbaa041ea
+  postgresql: "9.3"
 notifications:
   email:
     recipients:
@@ -11,3 +12,5 @@ notifications:
       - dan.jellesma@gmail.com
     on_failure: change
     on_success: never
+before_script:
+  - psql -c 'create database tag_bearer;' -U postgres
