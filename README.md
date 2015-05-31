@@ -61,3 +61,9 @@ Get the model associated with a specific tagging
 TagBearer::Tag.first.owner
 ##<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">
 ```
+
+Find models that match tag conditions
+```ruby
+Model.with_tags(environment: 'production', owner: 'johndoe')
+##[<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">]
+```

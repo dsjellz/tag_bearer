@@ -1,4 +1,6 @@
 require 'codeclimate-test-reporter'
+require 'rspec/collection_matchers'
+
 CodeClimate::TestReporter.start
 
 $LOAD_PATH << '.' unless $LOAD_PATH.include?('.')
@@ -16,11 +18,11 @@ ActiveRecord::Schema.define do
     t.string :value
     t.references :taggable, polymorphic: true, index: true
     t.timestamps null: false
-  end
+  end unless table_exists?(:tags)
 
   create_table :taggable_model, :force => true do |t|
     t.timestamps null: false
-  end
+  end unless table_exists?(:taggable_model)
 end
 
 Dir['./spec/support/*.rb'].sort.each { |f| require f }
