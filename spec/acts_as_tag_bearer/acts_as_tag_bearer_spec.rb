@@ -7,17 +7,17 @@ describe TagBearer::ActsAsTagBearer do
 
     it 'creates a single tag' do
       model.tag key: 'Owner', value: 'someone'
-      expect(model.tags.size).to eq 1
+      expect(model.tags).to have(1).match
     end
 
     it 'requires a key' do
       model.tag value: 'someone'
-      expect(model.tags.size).to eq 0
+      expect(model.tags).to have(0).matches
     end
 
     it 'does not require a value' do
       model.tag key: 'someone'
-      expect(model.tags.size).to eq 1
+      expect(model.tags).to have(1).match
     end
 
     it 'overwrites a tag with an existing key' do
@@ -27,11 +27,11 @@ describe TagBearer::ActsAsTagBearer do
       model.tag key: 'Owner', value: 'someone else'
       expect(model.get_tag('Owner')).to eq 'someone else'
 
-      expect(model.tags.size).to eq 1
+      expect(model.tags).to have(1).match
     end
   end
 
-  describe '#get_tag' do
+  describe 'get_tag' do
     let(:model) { TaggableModel.create }
 
     before(:each) do
@@ -47,7 +47,7 @@ describe TagBearer::ActsAsTagBearer do
     end
   end
 
-  describe '#full_sync!' do
+  describe 'full_sync!' do
     let(:model) { TaggableModel.create }
 
     before(:each) do
@@ -74,7 +74,7 @@ describe TagBearer::ActsAsTagBearer do
     end
   end
 
-  describe '#tag_list' do
+  describe 'tag_list' do
     let(:model) { TaggableModel.create }
 
     before(:each) do
@@ -84,6 +84,36 @@ describe TagBearer::ActsAsTagBearer do
 
     it 'returns all tag keys' do
       expect(model.tag_list).to include 'env', 'name'
+    end
+  end
+
+  describe '#with_tags' do
+    let(:bran) { TaggableModel.create }
+    let(:jaime) { TaggableModel.create }
+    let(:sansa) { TaggableModel.create }
+    let(:theon) { TaggableModel.create }
+
+    before(:each) do
+      bran.assign_tag home: 'winterfell', family: 'stark', gender: 'male'
+      jaime.assign_tag home: 'casterly rock', family: 'lannister', gender: 'male'
+      sansa.assign_tag home: 'winterfell', family: 'stark', gender: 'female'
+      theon.assign_tag home: 'iron islands', family: 'greyjoy', gender: nil
+    end
+
+    it 'returns matches on a single parameter' do
+      expect(TaggableModel.with_tags(home: 'winterfell')).to have(2).matches
+    end
+
+    it 'returns matches on multiple parameters' do
+      expect(TaggableModel.with_tags(home: 'winterfell', family: 'stark')).to have(2).matches
+    end
+
+    it 'only returns matches on all parameters' do
+      expect(TaggableModel.with_tags(gender: 'male', family: 'stark')).to have(1).match
+    end
+
+    it 'does not consider nil a match' do
+      expect(TaggableModel.with_tags(gender: 'male', family: 'greyjoy')).to have(0).matches
     end
   end
 end
