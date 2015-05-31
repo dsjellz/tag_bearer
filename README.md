@@ -3,6 +3,8 @@ A gem that handles tags in a "Key"/"Value" setup.
 
 We've been using acts_as_taggable_on for a lot of projects, and if all you need are single tags, it's a great solution. But similar to AWS, we needed a solution that allowed us to use Keys and Values, and Tag Bearer was born. 
 
+*This gem has been tested against mysql and postgresql*
+
 Setup is simple 
 
 ``` bash
@@ -30,7 +32,7 @@ Tag a model
 instance.tag(key: 'environment', value: 'development')
 
 # multiple tags
-instance.assign_tags(environment: 'development', owner: 'appowner')
+instance.assign_tag(environment: 'development', owner: 'appowner')
 
 ```
 

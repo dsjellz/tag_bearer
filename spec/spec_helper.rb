@@ -9,20 +9,25 @@ require File.expand_path('../../lib/tag_bearer', __FILE__)
 
 require 'database_cleaner'
 
-ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'tag_bearer', username: 'postgres')
-ActiveRecord::Schema.define do
-  self.verbose = false
+postgres = {adapter: 'postgresql', database: 'tag_bearer', username: 'postgres'}
+mysql = {adapter: 'mysql2', database: 'tag_bearer'}
 
-  create_table(:tags) do |t|
-    t.string :key
-    t.string :value
-    t.references :taggable, polymorphic: true, index: true
-    t.timestamps null: false
-  end unless table_exists?(:tags)
+[postgres, mysql].each do |connection_data|
+  ActiveRecord::Base.establish_connection(connection_data)
+  ActiveRecord::Schema.define do
+    self.verbose = false
 
-  create_table :taggable_model, :force => true do |t|
-    t.timestamps null: false
-  end unless table_exists?(:taggable_model)
+    create_table(:tags) do |t|
+      t.string :key
+      t.string :value
+      t.references :taggable, polymorphic: true, index: true
+      t.timestamps null: false
+    end unless table_exists?(:tags)
+
+    create_table :taggable_model, :force => true do |t|
+      t.timestamps null: false
+    end unless table_exists?(:taggable_model)
+  end
 end
 
 Dir['./spec/support/*.rb'].sort.each { |f| require f }
