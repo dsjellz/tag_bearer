@@ -15,14 +15,16 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rake'
+  s.add_dependency 'activerecord', '~> 4.0'
   s.add_dependency 'rails'
-  s.add_development_dependency 'pg'
+  s.add_dependency 'rake'
+
   s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'mysql2'
+  s.add_development_dependency 'pg'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rspec-collection_matchers'
-  s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rspec-its'
-  s.add_dependency 'activerecord', '~> 4.0'
+  s.add_development_dependency 'rspec-rails'
 
 end

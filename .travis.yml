@@ -14,3 +14,4 @@ notifications:
     on_success: never
 before_script:
   - psql -c 'create database tag_bearer;' -U postgres
+  - mysql -e 'create database tag_bearer;'
