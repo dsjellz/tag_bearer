@@ -103,6 +103,6 @@ describe TagBearer::ActsAsTagBearer do
         ActiveRecord::Base.establish_connection(adapter: 'postgresql', database: 'tag_bearer')
       end
     end
-
   end
+
 end

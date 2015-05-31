@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ['David Jellesma', 'Dan Jellesma']
   s.email       = ['davidjellesmas@gmail.com']
   s.homepage    = 'https://github.com/dsjellz/tag_bearer'
-  s.summary     = 'This gem implements key/value tagging for ActiveRecord models using either mysql2 or postgresl adapter'
+  s.summary     = 'This gem implements key/value tagging for ActiveRecord models using either mysql2 or postgres adapter'
   s.description = 'Key value tagging gem for ActiveRecord models'
   s.license     = 'MIT'
 
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pg', '~> 0.18'
   s.add_development_dependency 'rspec', '~> 3.2'
   s.add_development_dependency 'rspec-collection_matchers', '~> 1.1'
-  s.add_development_dependency 'rspec-its', '~> 1.2'
   s.add_development_dependency 'rspec-rails', '~> 3.2'
 
 end

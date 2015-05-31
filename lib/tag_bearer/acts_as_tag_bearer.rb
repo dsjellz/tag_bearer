@@ -2,6 +2,11 @@ require 'tag_bearer/acts_as_tag_bearer'
 require 'tag_bearer/tag'
 
 module TagBearer
+
+  def self.tag_table=(name)
+    TagBearer::Tag.table_name = name
+  end
+
   module ActsAsTagBearer
     extend ActiveSupport::Concern
 
@@ -13,18 +18,18 @@ module TagBearer
         include TagBearer::ActsAsTagBearer::LocalInstanceMethods
       end
 
+      def find_matches(conditions)
+        TagBearer::Tag.select(:taggable_id)
+          .where(taggable_type: name)
+          .where("(#{TagBearer::Tag.table_name}.key, #{TagBearer::Tag.table_name}.value) IN (#{conditions.join(',')})")
+          .group(:taggable_id, :taggable_type)
+          .having("COUNT(distinct #{TagBearer::Tag.table_name}.key)=#{conditions.size}").pluck(:taggable_id)
+      end
+
       def with_tags(params)
         conditions = params.map{ |condition| "('#{condition[0].to_s}', '#{condition[1].to_s}')" }
         matches = find_matches conditions
         matches.any? ? (name.constantize.find matches) : []
-      end
-
-      def find_matches(conditions)
-        TagBearer::Tag.select(:taggable_id)
-          .where(taggable_type: name)
-          .where("(tags.key, tags.value) IN (#{conditions.join(',')})")
-          .group(:taggable_id, :taggable_type)
-          .having("COUNT(distinct tags.key)=#{conditions.size}").pluck(:taggable_id)
       end
     end
 
