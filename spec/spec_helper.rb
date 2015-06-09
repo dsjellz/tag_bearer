@@ -27,6 +27,10 @@ mysql = {adapter: 'mysql2', database: 'tag_bearer'}
     create_table :taggable_model, :force => true do |t|
       t.timestamps null: false
     end unless table_exists?(:taggable_model)
+
+    create_table :another_taggable_model, :force => true do |t|
+      t.timestamps null: false
+    end unless table_exists?(:another_taggable_model)
   end
 end
 

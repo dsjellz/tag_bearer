@@ -1,11 +1,11 @@
-## Tag Bearer ![Travis CI](https://travis-ci.org/dsjellz/tag_bearer.svg?branch=master "Build Status") [![Code Climate](https://codeclimate.com/github/dsjellz/tag_bearer/badges/gpa.svg)](https://codeclimate.com/github/dsjellz/tag_bearer) [![Test Coverage](https://codeclimate.com/github/dsjellz/tag_bearer/badges/coverage.svg)](https://codeclimate.com/github/dsjellz/tag_bearer/coverage)
+## Tag Bearer ![Travis CI](https://travis-ci.org/dsjellz/tag_bearer.svg?branch=master "Build Status") [![Code Climate](https://codeclimate.com/github/dsjellz/tag_bearer/badges/gpa.svg)](https://codeclimate.com/github/dsjellz/tag_bearer) [![Test Coverage](https://codeclimate.com/github/dsjellz/tag_bearer/badges/coverage.svg)](https://codeclimate.com/github/dsjellz/tag_bearer/coverage) [![Gem Version](https://badge.fury.io/rb/tag_bearer.svg)](http://badge.fury.io/rb/tag_bearer)
 A gem that handles tags in a "Key"/"Value" setup.
 
-We've been using acts_as_taggable_on for a lot of projects, and if all you need are single tags, it's a great solution. But similar to AWS, we needed a solution that allowed us to use Keys and Values, and Tag Bearer was born. 
+We've been using acts_as_taggable_on for a lot of projects, and if all you need are single tags, it's a great solution. But similar to AWS, we needed a solution that allowed us to use Keys and Values, and Tag Bearer was born.
 
 *This gem has been tested against mysql and postgresql*
 
-Setup is simple 
+Setup is simple
 
 ``` bash
 gem install tag_bearer
@@ -68,8 +68,14 @@ TagBearer::Tag.first.owner
 ##<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">
 ```
 
-Find models that match tag conditions
+Find models of a specific resource that match tag conditions
 ```ruby
 Model.with_tags(environment: 'production', owner: 'johndoe')
 ##[<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">]
+```
+
+Find resources of all types that match a tag key/value set
+```ruby
+TagBearer.resources_with_tags(owner: 'Jim Lahey')
+##{:TaggableModel=>[#<TaggableModel id: 1, ...>, #<TaggableModel id: 2, ....>], :AnotherTaggableModel=>[#<AnotherTaggableModel id: 1, ...>]}
 ```
