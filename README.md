@@ -68,8 +68,14 @@ TagBearer::Tag.first.owner
 ##<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">
 ```
 
-Find models that match tag conditions
+Find models of a specific resource that match tag conditions
 ```ruby
 Model.with_tags(environment: 'production', owner: 'johndoe')
 ##[<YourModel id: 1, created_at: "2015-05-25 02:25:38", updated_at: "2015-05-25 02:25:38">]
+```
+
+Find resources of all types that match a tag key/value set
+```ruby
+TagBearer.resources_with_tags(owner: 'Jim Lahey')
+##{:TaggableModel=>[#<TaggableModel id: 1, ...>, #<TaggableModel id: 2, ....>], :AnotherTaggableModel=>[#<AnotherTaggableModel id: 1, ...>]}
 ```
